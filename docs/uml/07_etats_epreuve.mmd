@@ -1,0 +1,17 @@
+stateDiagram-v2
+  [*] --> Planifiee : création (planning, import, situation)
+  Planifiee --> CodesGeneres : répartition en salles
+  CodesGeneres --> CodesGeneres : regénération (aucune note saisie)
+  CodesGeneres --> Composee : marquée composée
+  CodesGeneres --> SaisieEnCours : première note
+  Composee --> SaisieEnCours : première note
+  SaisieEnCours --> Desanonymisee : levée d'anonymat (coordination)
+  Desanonymisee --> Desanonymisee : correction motivée (coordination)
+  Desanonymisee --> Cloturee : clôture (coordination)
+  Cloturee --> [*]
+  Planifiee : Planifiée
+  CodesGeneres : Codes générés
+  Composee : Composée
+  SaisieEnCours : Saisie en cours
+  Desanonymisee : Désanonymisée
+  Cloturee : Clôturée

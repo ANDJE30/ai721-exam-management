@@ -1,0 +1,20 @@
+# AI721_ASTRA_LUZ_2.0 sur Render : site statique gratuit (dossier site/ déjà construit).
+# Render › New › Blueprint › dépôt ANDJE30/ai721-exam-management.
+# Adresse : https://ai721-astra-luz.onrender.com (Render ajoute un suffixe si ce nom est déjà pris).
+# Base en ligne : ajouter le domaine Render aux domaines autorisés de Firebase Authentication.
+services:
+  - type: web
+    name: ai721-astra-luz
+    runtime: static
+    buildCommand: echo "Site déjà construit dans site/"
+    staticPublishPath: ./site
+    headers:
+      - path: /sw.js
+        name: Cache-Control
+        value: no-cache
+      - path: /config.js
+        name: Cache-Control
+        value: no-cache
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache

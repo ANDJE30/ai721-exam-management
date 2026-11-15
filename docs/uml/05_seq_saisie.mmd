@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  actor S as Secrétariat
+  participant D as Douchette (clavier)
+  participant A as Application
+  participant DB as Cloud Firestore
+  S->>D: scanner la copie
+  D->>A: 12 chiffres + Entrée
+  A->>A: contrôler la clé MOD 97-10
+  A->>A: retrouver l'épreuve et la table
+  alt code invalide ou autre épreuve
+    A-->>S: message d'erreur, aucune note
+  else copie reconnue
+    A-->>S: matière, situation, table, salle (sans nom)
+    S->>A: taper la note + Entrée
+    A->>A: contrôler le barème
+    A->>DB: fusionner marks.table (note, auteur, heure)
+    DB-->>A: accepté (anonymat non levé)
+    A-->>S: confirmation, curseur revenu au code
+    DB-->>A: diffusion aux autres postes (temps réel)
+  end

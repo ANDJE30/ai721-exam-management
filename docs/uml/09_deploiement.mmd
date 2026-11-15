@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph POSTE["Postes du secrétariat (PC, tablette, téléphone)"]
+    NAV["Navigateur ou application installée (PWA)<br/>cache hors connexion"]
+    DOU["Douchette USB<br/>Code 128"]
+    IMP["Imprimante laser<br/>PDF A4"]
+  end
+  subgraph GH["GitHub Pages (gratuit)"]
+    SITE["Site statique HTTPS<br/>andje30.github.io/ai721-exam-management"]
+  end
+  subgraph FB["Firebase, offre Spark (gratuite)"]
+    AUTH["Authentication<br/>e-mail et mot de passe"]
+    FS["Cloud Firestore<br/>règles de sécurité par rôle"]
+  end
+  DOU -- "frappe clavier" --> NAV
+  NAV -- "PDF générés sur le poste" --> IMP
+  SITE -- "HTML, JS, polices, bibliothèques" --> NAV
+  NAV -- "connexion" --> AUTH
+  NAV <-- "lectures, écritures, temps réel" --> FS

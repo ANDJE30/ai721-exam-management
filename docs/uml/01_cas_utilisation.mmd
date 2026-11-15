@@ -1,0 +1,42 @@
+flowchart LR
+  SE["Secrétariat<br/>des évaluations"]
+  PR["Préfet des études"]
+  CO["Coordination"]
+  LE["Lecture seule"]
+  PR -. "hérite des droits" .-> SE
+  CO -. "hérite des droits" .-> PR
+  subgraph S1["Préparer et saisir"]
+    direction TB
+    U2(["Importer élèves, enseignants, salles"])
+    U3(["Définir le programme des classes"])
+    U4(["Planifier une évaluation ou une situation"])
+    U5(["Répartir en salles, générer les codes-barres"])
+    U6(["Éditer listes, émargements, étiquettes,<br/>bordereaux (un seul PDF)"])
+    U7(["Enregistrer les absences"])
+    U8(["Saisir les notes sous code"])
+    U2 ~~~ U3 ~~~ U4 ~~~ U5 ~~~ U6 ~~~ U7 ~~~ U8
+  end
+  subgraph S2["Piloter"]
+    direction TB
+    U14(["Paramétrer l'établissement<br/>(logo, en-tête, règles)"])
+    U15(["Suivre sa préfecture<br/>(matrice de suivi, alertes)"])
+    U14 ~~~ U15
+  end
+  subgraph S3["Garantir l'anonymat et l'intégrité"]
+    direction TB
+    U9(["Lever l'anonymat"])
+    U10(["Corriger une note après levée,<br/>clôturer une épreuve"])
+    U12(["Valider les comptes, attribuer les rôles"])
+    U13(["Sauvegarder, restaurer, nouvelle année"])
+    U9 ~~~ U10 ~~~ U12 ~~~ U13
+  end
+  subgraph S4["Consulter"]
+    direction TB
+    U1(["Se connecter, gérer son mot de passe"])
+    U11(["Consulter résultats et statistiques,<br/>éditer relevés et rapports"])
+    U1 ~~~ U11
+  end
+  SE --> S1
+  PR --> S2
+  CO --> S3
+  LE --> S4

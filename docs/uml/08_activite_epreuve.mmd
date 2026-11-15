@@ -1,0 +1,19 @@
+flowchart TD
+  A([Début]) --> B[Planifier l'épreuve<br/>situation, matière, classes, créneau]
+  B --> C{Conflit de classe<br/>ou de salle ?}
+  C -- oui --> B
+  C -- non --> D[Répartir en salles<br/>brassage alterné]
+  D --> E[Générer les codes-barres]
+  E --> F[Imprimer dossier du jour<br/>et étiquettes]
+  F --> G[Composition : étiquettes collées,<br/>émargement, absents saisis]
+  G --> H[Détacher les en-têtes nominatifs,<br/>remettre les lots aux correcteurs]
+  H --> I[Saisir les notes sous code]
+  I --> J{Toutes les copies<br/>traitées ?}
+  J -- non --> K[Rechercher les copies sans note<br/>par salle] --> I
+  J -- oui --> L{Arbitrages en attente ?}
+  L -- oui --> M[Troisième correction] --> I
+  L -- non --> N[Lever l'anonymat<br/>coordination]
+  N --> O[Imprimer PV, relevés, statistiques]
+  O --> P[Réclamations traitées]
+  P --> Q[Clôturer l'épreuve]
+  Q --> R([Fin])

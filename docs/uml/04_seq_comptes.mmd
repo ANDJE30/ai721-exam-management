@@ -1,0 +1,24 @@
+sequenceDiagram
+  autonumber
+  actor U as Nouvel utilisateur
+  participant A as Application (navigateur)
+  participant AU as Firebase Authentication
+  participant DB as Cloud Firestore
+  actor C as Coordination
+  U->>A: Créer un compte (nom, e-mail, mot de passe)
+  A->>AU: createUserWithEmailAndPassword
+  AU-->>A: utilisateur authentifié (uid)
+  A->>DB: lire cfg/owner
+  alt base vide (aucun propriétaire)
+    A->>DB: écrire cfg/owner + users/uid (role = coordination)
+    DB-->>A: accepté par les règles
+    A-->>U: accès complet (coordination)
+  else propriétaire existant
+    A->>DB: écrire users/uid (role = attente)
+    A-->>U: écran « compte en attente »
+    C->>A: Utilisateurs et rôles : attribuer « secrétariat »
+    A->>DB: mettre à jour users/uid (role, préfectures)
+    DB-->>A: accepté (règle : coordination seulement)
+    U->>A: recharger la page
+    A-->>U: accès selon le rôle
+  end

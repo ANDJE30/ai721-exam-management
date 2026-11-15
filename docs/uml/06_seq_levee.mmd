@@ -1,0 +1,15 @@
+sequenceDiagram
+  autonumber
+  actor C as Coordination
+  participant A as Application
+  participant DB as Cloud Firestore
+  C->>A: Désanonymat et résultats › Lever l'anonymat
+  A->>A: contrôles (copies traitées, arbitrages)
+  A-->>C: récapitulatif, confirmation demandée
+  C->>A: confirmer (ou lever malgré tout)
+  A->>DB: écrire anon.lifted = vrai, statut désanonymisée
+  DB->>DB: règle : rôle coordination exigé
+  DB-->>A: accepté
+  A->>DB: ajouter l'entrée au journal d'audit
+  A-->>C: résultats nominatifs, rangs, statistiques
+  C->>A: imprimer PV et relevés (un PDF)

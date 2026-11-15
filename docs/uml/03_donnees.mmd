@@ -1,0 +1,45 @@
+erDiagram
+  CFG ||--o{ CLASSES : "structure"
+  CLASSES ||--o{ EVALS : "classes evaluees"
+  USERS ||--o{ LOGS : "actions"
+  CFG {
+    string id PK "settings, subjects, teachers, rooms, security, owner"
+    map settings "etablissement, en-tete, logo, regles"
+    array list "matieres, enseignants ou salles"
+  }
+  CLASSES {
+    string id PK "c_2c1 ... c_tses"
+    string level "2nde, 1ere, tle"
+    string nom
+    string pole
+    int rang
+    array students "matricule, nom, prenom, sexe, dn, statut"
+    array subjects "m, coef, prof"
+  }
+  EVALS {
+    string id PK
+    string level
+    string subj "code matiere"
+    int trim
+    int sit
+    string date
+    string start
+    string end
+    array classes
+    map placement "list: eleve, classe, table ; rooms"
+    map marks "cle = table 001..999"
+    map anon "lifted, at, by"
+    string status
+  }
+  USERS {
+    string uid PK "identifiant Firebase Auth"
+    string name
+    string email
+    string role
+    array levels
+    number lastSeen
+  }
+  LOGS {
+    string day PK "AAAAMMJJ"
+    map entries "at, who, role, action, detail"
+  }
